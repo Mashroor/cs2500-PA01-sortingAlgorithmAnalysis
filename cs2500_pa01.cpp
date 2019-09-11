@@ -152,8 +152,8 @@ void merge(vector<int>& arr, int p, int q, int r){
 }
 
 void selectionSort(vector<int>& arr){
-    int i, j, min_index;
-    
+    int i = 0, j, min_index = i;
+    assert(arr[min_index] == arr[i]); // Loop Invariant, Init
     for(i = 0; i < arr.size(); i++){
         min_index = i;
         for(j = i + 1; j < arr.size(); j++){
@@ -162,6 +162,7 @@ void selectionSort(vector<int>& arr){
             }
         }
         swap(&arr[min_index], &arr[i]);
+        assert(arr[i] <= arr[min_index]); // Loop Invariant, Maint
     }
     assert(min_index <= arr[arr.size()-1]); // Loop Invariant, Term
 }
