@@ -66,11 +66,11 @@ int main(){
     sortedCheck(vSelection);
 
     // report formatted runtimes
-    printVec(vInsertion);
+ //   printVec(vInsertion);
     cout << "Insertion Sort runtime: " <<  durationInsertion.count() << "ms" << endl;
-    printVec(vMerge);
+ //   printVec(vMerge);
     cout << "Merge Sort runtime: " <<  durationMerge.count() << "ms" << endl;
-    printVec(vSelection);
+ //   printVec(vSelection);
     cout << "Selection Sort runtime: " <<  durationSelection.count() << "ms" << endl; 
 
     return 0;
@@ -85,7 +85,9 @@ void printVec(vector<int> v){
 }
 
 void insertionSort(vector<int> & arr){
-    int i, j, key;
+    int i = 1, j, key;
+    assert(i == 1); // Loop Invariant, init
+
     for(i = 1; i < arr.size(); i++){
         key = arr[i];
         j = i - 1;
@@ -94,7 +96,9 @@ void insertionSort(vector<int> & arr){
             j = j - 1;
         }
         arr[j+1]= key;
+        assert(arr[i] >= arr[i - 1]); // Loop Invariant, Maint
     }
+    assert( i > arr.size()-1); // Loop Invariant, Term
 }
 
 void mergeSort(vector<int>& arr, int p, int r){
@@ -124,6 +128,7 @@ void merge(vector<int>& arr, int p, int q, int r){
     }
     i = 0;
     j = 0;
+
     for(k = p; i < n1 && j < n2; k++){
         if(L[i] < R[j]){
             arr[k] = L[i];
@@ -148,6 +153,7 @@ void merge(vector<int>& arr, int p, int q, int r){
 
 void selectionSort(vector<int>& arr){
     int i, j, min_index;
+    
     for(i = 0; i < arr.size(); i++){
         min_index = i;
         for(j = i + 1; j < arr.size(); j++){
@@ -157,6 +163,7 @@ void selectionSort(vector<int>& arr){
         }
         swap(&arr[min_index], &arr[i]);
     }
+    assert(min_index <= arr[arr.size()-1]); // Loop Invariant, Term
 }
 
 void swap(int* x, int* y){
