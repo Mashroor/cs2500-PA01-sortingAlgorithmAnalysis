@@ -66,11 +66,11 @@ int main(){
     sortedCheck(vSelection);
 
     // report formatted runtimes
- //   printVec(vInsertion);
+   printVec(vInsertion);
     cout << "Insertion Sort runtime: " <<  durationInsertion.count() << "ms" << endl;
- //   printVec(vMerge);
+   printVec(vMerge);
     cout << "Merge Sort runtime: " <<  durationMerge.count() << "ms" << endl;
- //   printVec(vSelection);
+   printVec(vSelection);
     cout << "Selection Sort runtime: " <<  durationSelection.count() << "ms" << endl; 
 
     return 0;
@@ -117,9 +117,12 @@ void merge(vector<int>& arr, int p, int q, int r){
     int i, j, k;
     int n1 = q - p + 1;
     int n2 = r - q; 
+    
     vector<int> L(n1+1);
     vector<int> R(n2+1);
-
+    L.clear();
+    R.clear();
+    assert(L.empty() && R.empty()); 
     for(i = 0; i < n1; i++){
         L[i] = arr[p + i];
     }
@@ -149,6 +152,7 @@ void merge(vector<int>& arr, int p, int q, int r){
         j++;
         k++;
     }
+    assert(k == (r+1)); // Loop Invariant, Term
 }
 
 void selectionSort(vector<int>& arr){
@@ -173,7 +177,7 @@ void swap(int* x, int* y){
     *y = temp;
 }
 
-// Post Condition Check
+// Post Condition Check, check if array is sorted
 void sortedCheck(vector<int> arr){
     int k = 0;
     for(int i = 0; i < arr.size(); i++){
