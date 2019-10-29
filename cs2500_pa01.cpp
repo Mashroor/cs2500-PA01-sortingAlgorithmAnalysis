@@ -17,12 +17,32 @@ using namespace std;
 using namespace std::chrono;
 
 // function definitions
+//Pre: A vector v exists
+//Post: outputs contents of vector to std out
 void printVec(vector<int> v);
+
+//Pre: the vector arr exists
+//Post: The vector will be sorted upon completion of this method
 void insertionSort(vector<int>& arr);
+
+//Pre: the vector arr exists
+//Post: The vector will be sorted upon completion of this method
 void mergeSort(vector<int>& arr, int p, int r);
+
+//Pre: the vector arr exists
+//Post: The vector will be sorted upon completion of this method
 void merge(vector<int>& arr, int p, int q, int r);
+
+//Pre: the vector arr exists
+//Post: The vector will be sorted upon completion of this method
 void selectionSort(vector<int>& arr);
+
+//Pre: Memory locations contain data
+//Post: memory at each position are swapped
 void swap(int* x, int* y);
+
+//Pre: A vector arr exists
+//Post: If arr is not sorted, program will terminate via assert()
 void sortedCheck(vector<int> arr);
 
 int main(){
@@ -39,9 +59,9 @@ int main(){
         vMerge.push_back(temp);
         vSelection.push_back(temp);
     }
-    
+    ///////////////////////
     // begin insertion sort
-    
+    ///////////////////////
     auto startInsertion = high_resolution_clock::now();
     insertionSort(vInsertion);
     auto stopInsertion = high_resolution_clock::now();
@@ -49,7 +69,10 @@ int main(){
     // Post Check, Is this sorted?
     sortedCheck(vInsertion);
     
+    ///////////////////
     // begin merge sort
+    ///////////////////
+    
     auto startMerge = high_resolution_clock::now();
     mergeSort(vMerge, 0, vMerge.size()-1);
     auto stopMerge = high_resolution_clock::now();
@@ -57,7 +80,9 @@ int main(){
     // Post Check, Is this sorted?
     sortedCheck(vMerge);
     
+    ///////////////////////
     // begin selection sort
+    ///////////////////////
     auto startSelection = high_resolution_clock::now();
     selectionSort(vSelection);
     auto stopSelection = high_resolution_clock::now();
@@ -76,12 +101,13 @@ int main(){
     return 0;
 }
 
-// function prototypes ----------//
+//------------ function prototypes ----------//
 void printVec(vector<int> v){
     // print vector
     for(int i = 0; i < v.size(); i++){
-        cout << v[i] << endl;
+        cout << v[i] << " ";
     }
+    cout << endl;
 }
 
 void insertionSort(vector<int> & arr){
