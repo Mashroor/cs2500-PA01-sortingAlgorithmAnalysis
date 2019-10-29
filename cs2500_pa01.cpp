@@ -114,6 +114,9 @@ void insertionSort(vector<int> & arr){
     int i = 1, j, key;
     assert(i == 1); // Loop Invariant, init
 
+    //Moves elements of arr[0..i-1], that are
+    //greater than key to one position ahead
+    //of their current position
     for(i = 1; i < arr.size(); i++){
         key = arr[i];
         j = i - 1;
@@ -140,15 +143,18 @@ void mergeSort(vector<int>& arr, int p, int r){
 }
 
 void merge(vector<int>& arr, int p, int q, int r){
+    //merge helper method, this will be called recursively to split our array into subarrays
     int i, j, k;
     int n1 = q - p + 1;
     int n2 = r - q; 
     
-    vector<int> L(n1+1);
+    vector<int> L(n1+1); //initialize 2 subarrays to hold our halves of each array
     vector<int> R(n2+1);
     L.clear();
     R.clear();
     assert(L.empty() && R.empty()); 
+
+    // Copy data to temp arrays L and R
     for(i = 0; i < n1; i++){
         L[i] = arr[p + i];
     }
@@ -158,6 +164,7 @@ void merge(vector<int>& arr, int p, int q, int r){
     i = 0;
     j = 0;
 
+    // merging temp arrays back to sorted array[1...r]
     for(k = p; i < n1 && j < n2; k++){
         if(L[i] < R[j]){
             arr[k] = L[i];
@@ -184,16 +191,21 @@ void merge(vector<int>& arr, int p, int q, int r){
 void selectionSort(vector<int>& arr){
     int i = 0, j, min_index = i;
     assert(arr[min_index] == arr[i]); // Loop Invariant, Init
+
+    //This for loop searches for our minimal index, but iterating through the array once
     for(i = 0; i < arr.size(); i++){
         min_index = i;
         for(j = i + 1; j < arr.size(); j++){
+            //reset the min index if a new smaller element is found
             if(arr[j] < arr[min_index]){
                 min_index = j;
             }
         }
+        //we then swap the min element with the first element in the array
         swap(&arr[min_index], &arr[i]);
         assert(arr[i] <= arr[min_index]); // Loop Invariant, Maint
     }
+    //The array should be sorted upon completion
     assert(min_index <= arr[arr.size()-1]); // Loop Invariant, Term
 }
 
